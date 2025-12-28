@@ -39,29 +39,30 @@
     </section>
 
     <footer class="foot">
-     <small>
-       data exists / meaning does not<br>
-       作った人： <span class="author">ogihcys-261</span><br>
-       問い合わせはこちら: <a href="mailto:ogihcys261@gmail.com">ogihcys261@gmail.com</a>
-     </small>
-　　</footer>
-
+      <small>
+        data exists / meaning does not<br>
+        作った人： <span class="author">ogihcys-261</span><br>
+        問い合わせ：
+        <a href="mailto:ogihcys261@gmail.com">ogihcys261@gmail.com</a>
+        /
+        <a href="https://forms.gle/khd9KgJpAnE1scEv8" target="_blank" rel="noreferrer">Googleフォーム</a>
+      </small>
+    </footer>
   </main>
 
   <script>
     // ===== 作品リスト（ここだけ増やせばOK） =====
+    // repo は使わない（Repoボタンを消したため）
     const WORKS = [
       {
         title: "意味のない円グラフ",
         desc: "それっぽい内訳が出ます。意味は出ません。",
-        url: "https://ogihcys-261.github.io/meaningless-pie/",
-        repo: "https://github.com/ogihcys-261/meaningless-pie"
+        url: "https://ogihcys-261.github.io/meaningless-pie/"
       },
       {
         title: "歌詞タイピング × YouTube",
         desc: "YouTubeと同期して歌詞をタイピング。練習モード・曲登録/編集あり。",
-        url: "https://ogihcys-261.github.io/typing_app/",
-        repo: "https://github.com/ogihcys-261/typing_app"
+        url: "https://ogihcys-261.github.io/typing_app/"
       },
     ];
 
@@ -76,13 +77,15 @@
       "未定義なので未定義です",
     ];
 
+    const STABILITY = ["不明", "たぶん安定", "観測不能"];
+    const ENVS = ["気分", "夜", "Wi-Fiが弱い場所"];
+
     function randInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     function pick(arr) {
       return arr[randInt(0, arr.length - 1)];
     }
-
     function shuffle(arr){
       const a = [...arr];
       for(let i=a.length-1;i>0;i--){
@@ -92,9 +95,30 @@
       return a;
     }
 
+    // --- 適当メタ情報 ---
+    function fakeLastUpdated() {
+      const daysAgo = randInt(0, 420); // 最大420日前（意味はない）
+      const d = new Date();
+      d.setDate(d.getDate() - daysAgo);
+
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+
+      return `${y}-${m}-${day}`;
+    }
+
+    function fakeVersion() {
+      const major = randInt(0, 2);   // v0〜v2
+      const minor = randInt(0, 9);   // .0〜.9
+      const patch = randInt(0, 20);  // .0〜.20
+      return `v${major}.${minor}.${patch}`;
+    }
+
     function renderWorks() {
       const grid = document.getElementById("grid");
       grid.innerHTML = "";
+
       WORKS.forEach(() => {}); // 意味のない一行
 
       WORKS.forEach(w => {
@@ -102,19 +126,27 @@
         el.className = "card";
 
         const meaninglessId = String(100000 + randInt(0, 899999));
-
-        // Repo が空ならボタンを出さない（作品によっては隠せる）
-        const repoBtn = w.repo
-          ? `<a class="btn ghost" href="${w.repo}" target="_blank" rel="noreferrer">Repo</a>`
-          : "";
+        const updated = fakeLastUpdated();
+        const version = fakeVersion();
+        const stability = pick(STABILITY);
+        const env = pick(ENVS);
 
         el.innerHTML = `
           <div class="cardTop">
             <div class="badge">ID:${meaninglessId}</div>
             <div class="badge ghost">STATUS: ok (probably)</div>
           </div>
+
           <h3>${w.title}</h3>
           <p class="desc">${w.desc}</p>
+
+          <p class="meta">
+            最終更新日（適当）：${updated}<br>
+            バージョン：${version}<br>
+            安定度：${stability}<br>
+            対応環境：${env}
+          </p>
+
           <div class="row">
             <a class="btn" href="${w.url}" target="_blank" rel="noreferrer">Open</a>
           </div>
@@ -143,14 +175,14 @@
     // イベント
     document.getElementById("btnReroll").addEventListener("click", () => {
       rerollStats();
-      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS)); // 意味のない並び替え
       renderWorks();
     });
 
     document.getElementById("btnCopy").addEventListener("click", copyExcuse);
 
     document.getElementById("search").addEventListener("input", () => {
-      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS)); // 意味のない検索
       renderWorks();
     });
 
