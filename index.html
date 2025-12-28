@@ -55,6 +55,12 @@
         url: "https://ogihcys-261.github.io/meaningless-pie/",
         repo: "https://github.com/ogihcys-261/meaningless-pie"
       },
+      {
+        title: "歌詞タイピング × YouTube",
+        desc: "YouTubeと同期して歌詞をタイピング。練習モード・曲登録/編集あり。",
+        url: "https://ogihcys-261.github.io/typing_app/",
+        repo: "https://github.com/ogihcys-261/typing_app"
+      },
     ];
 
     const EXCUSES = [
@@ -95,6 +101,11 @@
 
         const meaninglessId = String(100000 + randInt(0, 899999));
 
+        // Repo が空ならボタンを出さない（作品によっては隠せる）
+        const repoBtn = w.repo
+          ? `<a class="btn ghost" href="${w.repo}" target="_blank" rel="noreferrer">Repo</a>`
+          : "";
+
         el.innerHTML = `
           <div class="cardTop">
             <div class="badge">ID:${meaninglessId}</div>
@@ -104,6 +115,7 @@
           <p class="desc">${w.desc}</p>
           <div class="row">
             <a class="btn" href="${w.url}" target="_blank" rel="noreferrer">Open</a>
+            ${repoBtn}
           </div>
         `;
         grid.appendChild(el);
