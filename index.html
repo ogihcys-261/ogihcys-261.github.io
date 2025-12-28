@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>meaningless portal</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>meaningless portal</h1>
+      <p class="sub">
+        これは作品一覧です。役には立ちません。<br>
+        たぶん。
+      </p>
+
+      <div class="stats">
+        <div class="pill" id="stat1">存在濃度: --</div>
+        <div class="pill" id="stat2">意味: 0%</div>
+        <div class="pill" id="stat3">やる気: 未検出</div>
+      </div>
+
+      <div class="row">
+        <button class="btn" id="btnReroll">ランダムに納得する</button>
+        <button class="btn ghost" id="btnCopy">今日の言い訳をコピー</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>作品（なぜか増える）</h2>
+
+      <!-- 意味のない検索 -->
+      <div class="search">
+        <input id="search" type="text" placeholder="検索（意味はありません）" />
+        <span class="hint">※入力内容は解釈されません</span>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <footer class="foot">
+      <small>
+        data exists / meaning does not<br>
+        made by <span class="author">ogihcys-261</span>
+      </small>
+    </footer>
+  </main>
+
+  <script>
+    // ===== 作品リスト（ここだけ増やせばOK） =====
+    const WORKS = [
+      {
+        title: "意味のない円グラフ",
+        desc: "それっぽい内訳が出ます。意味は出ません。",
+        url: "https://ogihcys-261.github.io/meaningless-pie/",
+        repo: "https://github.com/ogihcys-261/meaningless-pie"
+      },
+    ];
+
+    const EXCUSES = [
+      "本日は世界の密度が高かったため",
+      "観測者の状態が不安定なため",
+      "だいたい不可抗力です",
+      "意味が0%のため",
+      "仕様です（たぶん）",
+      "眠気が優勢だったため",
+      "トマトのせいです",
+      "未定義なので未定義です",
+    ];
+
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function pick(arr) {
+      return arr[randInt(0, arr.length - 1)];
+    }
+
+    function shuffle(arr){
+      const a = [...arr];
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function renderWorks() {
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+      WORKS.forEach(() => {}); // 意味のない一行
+
+      WORKS.forEach(w => {
+        const el = document.createElement("article");
+        el.className = "card";
+
+        const meaninglessId = String(100000 + randInt(0, 899999));
+
+        el.innerHTML = `
+          <div class="cardTop">
+            <div class="badge">ID:${meaninglessId}</div>
+            <div class="badge ghost">STATUS: ok (probably)</div>
+          </div>
+          <h3>${w.title}</h3>
+          <p class="desc">${w.desc}</p>
+          <div class="row">
+            <a class="btn" href="${w.url}" target="_blank" rel="noreferrer">Open</a>
+            <a class="btn ghost" href="${w.repo}" target="_blank" rel="noreferrer">Repo</a>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    function rerollStats() {
+      document.getElementById("stat1").textContent = `存在濃度: ${randInt(3, 97)}%`;
+      document.getElementById("stat2").textContent = "意味: 0%";
+      document.getElementById("stat3").textContent =
+        `やる気: ${pick(["未検出", "欠損", "推定", "保留", "N/A"])}`;
+    }
+
+    async function copyExcuse() {
+      const text = `【今日の言い訳】\n${pick(EXCUSES)}\n(根拠なし)`;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("コピーしました");
+      } catch {
+        prompt("コピーして使ってください", text);
+      }
+    }
+
+    // イベント
+    document.getElementById("btnReroll").addEventListener("click", () => {
+      rerollStats();
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
+      renderWorks();
+    });
+
+    document.getElementById("btnCopy").addEventListener("click", copyExcuse);
+
+    document.getElementById("search").addEventListener("input", () => {
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
+      renderWorks();
+    });
+
+    // 初期表示
+    renderWorks();
+    rerollStats();
+  </script>
+</body>
+</html>

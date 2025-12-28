@@ -1,0 +1,163 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans JP", sans-serif;
+  background:#f6f7f9;
+  color:#111;
+}
+
+.wrap{
+  max-width: 980px;
+  margin:0 auto;
+  padding: 28px 16px 40px;
+}
+
+.top h1{
+  margin:0 0 6px;
+  font-size: 30px;
+  letter-spacing: .02em;
+}
+
+.sub{
+  margin:0;
+  opacity:.78;
+  line-height: 1.6;
+}
+
+.stats{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 14px;
+}
+
+.pill{
+  border:1px solid #e8eaee;
+  background:#fff;
+  padding:8px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  opacity:.9;
+}
+
+.panel{
+  margin-top: 18px;
+  background:#fff;
+  border:1px solid #e8eaee;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.05);
+}
+
+.panel h2{
+  margin: 0 0 12px;
+  font-size: 16px;
+  opacity:.9;
+}
+
+.search{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+
+.search input{
+  flex:1;
+  min-width: 220px;
+  border:1px solid #e8eaee;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.search .hint{
+  font-size: 12px;
+  opacity: .6;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.card{
+  border:1px solid #e8eaee;
+  border-radius: 16px;
+  padding: 14px;
+  background:#fff;
+}
+
+.cardTop{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom: 10px;
+}
+
+.badge{
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  padding:4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.badge.ghost{
+  background:transparent;
+  color:#111;
+}
+
+.card h3{
+  margin: 6px 0 6px;
+  font-size: 16px;
+}
+
+.desc{
+  margin:0 0 12px;
+  opacity:.78;
+  line-height: 1.5;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 12px;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor:pointer;
+  font-size: 14px;
+}
+
+.btn.ghost{
+  background:transparent;
+  color:#111;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.foot{
+  margin-top: 16px;
+  opacity:.65;
+}
+
+.author{
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}
