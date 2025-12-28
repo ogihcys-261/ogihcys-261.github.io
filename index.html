@@ -15,7 +15,7 @@
       </p>
 
       <div class="stats">
-        <div class="pill" id="stat1">存在濃度: --</div>
+        <div class="pill" id="stat1">睡魔: --</div>
         <div class="pill" id="stat2">意味: 0%</div>
         <div class="pill" id="stat3">やる気: 未検出</div>
       </div>
@@ -27,7 +27,7 @@
     </header>
 
     <section class="panel">
-      <h2>作品（なぜか増える）</h2>
+      <h2>作品</h2>
 
       <!-- 意味のない検索 -->
       <div class="search">
@@ -80,10 +80,14 @@
       "眠気が優勢だったため",
       "トマトのせいです",
       "未定義なので未定義です",
+　　　"今日はなんだか湿気がすごいので"
+      "トンネルを掘るため"
+      "私は誰ですか？"
+      "地下労働するため"  
     ];
 
-    const STABILITY = ["不明", "たぶん安定", "観測不能"];
-    const ENVS = ["気分", "夜", "Wi-Fiが弱い場所"];
+    const STABILITY = ["不明", "たぶん安定", "観測不能", "めっちゃ安定", "それはもう安定のほかない", "もうだめだ"];
+    const ENVS = ["気分", "夜", "Wi-Fiが弱い場所", "Wi-Fiがめっちゃ強いとこ", "あなたの心の中"];
 
     function randInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
