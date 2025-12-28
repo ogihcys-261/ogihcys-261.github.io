@@ -52,7 +52,6 @@
 
   <script>
     // ===== 作品リスト（ここだけ増やせばOK） =====
-    // repo は使わない（Repoボタンを消したため）
     const WORKS = [
       {
         title: "意味のない円グラフ",
@@ -61,8 +60,14 @@
       },
       {
         title: "歌詞タイピング × YouTube",
-        desc: "YouTubeと同期して歌詞をタイピング。練習モード・曲登録/編集あり。",
+        desc: "YouTubeの動画に合わせてタイピングできます。自分で歌詞とタイミングを設定する必要がありますが",
         url: "https://ogihcys-261.github.io/typing_app/"
+      },
+      {
+        title: "さいころ",
+        desc: "運試しや順番決めにどうぞ！好きな数のさいころの設定ができます",
+        // 
+        url: "https://ogihcys-261.github.io/saikoroapp/"
       },
     ];
 
@@ -97,21 +102,20 @@
 
     // --- 適当メタ情報 ---
     function fakeLastUpdated() {
-      const daysAgo = randInt(0, 420); // 最大420日前（意味はない）
+      const daysAgo = randInt(0, 420);
       const d = new Date();
       d.setDate(d.getDate() - daysAgo);
 
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, "0");
       const day = String(d.getDate()).padStart(2, "0");
-
       return `${y}-${m}-${day}`;
     }
 
     function fakeVersion() {
-      const major = randInt(0, 2);   // v0〜v2
-      const minor = randInt(0, 9);   // .0〜.9
-      const patch = randInt(0, 20);  // .0〜.20
+      const major = randInt(0, 2);
+      const minor = randInt(0, 9);
+      const patch = randInt(0, 20);
       return `v${major}.${minor}.${patch}`;
     }
 
@@ -172,21 +176,19 @@
       }
     }
 
-    // イベント
     document.getElementById("btnReroll").addEventListener("click", () => {
       rerollStats();
-      WORKS.splice(0, WORKS.length, ...shuffle(WORKS)); // 意味のない並び替え
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
       renderWorks();
     });
 
     document.getElementById("btnCopy").addEventListener("click", copyExcuse);
 
     document.getElementById("search").addEventListener("input", () => {
-      WORKS.splice(0, WORKS.length, ...shuffle(WORKS)); // 意味のない検索
+      WORKS.splice(0, WORKS.length, ...shuffle(WORKS));
       renderWorks();
     });
 
-    // 初期表示
     renderWorks();
     rerollStats();
   </script>
