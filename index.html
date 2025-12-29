@@ -29,7 +29,6 @@
     <section class="panel">
       <h2>作品</h2>
 
-      <!-- 意味のない検索 -->
       <div class="search">
         <input id="search" type="text" placeholder="検索（意味はありません）" />
         <span class="hint">※入力内容は解釈されません</span>
@@ -51,7 +50,6 @@
   </main>
 
   <script>
-    // ===== 作品リスト（ここだけ増やせばOK） =====
     const WORKS = [
       {
         title: "意味のない円グラフ",
@@ -66,7 +64,6 @@
       {
         title: "さいころ",
         desc: "運試しや順番決めにどうぞ！好きな数のさいころの設定ができます",
-        // 
         url: "https://ogihcys-261.github.io/saikoroapp/"
       },
     ];
@@ -80,14 +77,28 @@
       "眠気が優勢だったため",
       "トマトのせいです",
       "未定義なので未定義です",
-　　　"今日はなんだか湿気がすごいので"
-      "トンネルを掘るため"
-      "私は誰ですか？"
-      "地下労働するため"  
+      "今日はなんだか湿気がすごいので",
+      "トンネルを掘るため",
+      "私は誰ですか？",
+      "地下労働するため"
     ];
 
-    const STABILITY = ["不明", "たぶん安定", "観測不能", "めっちゃ安定", "それはもう安定のほかない", "もうだめだ"];
-    const ENVS = ["気分", "夜", "Wi-Fiが弱い場所", "Wi-Fiがめっちゃ強いとこ", "あなたの心の中"];
+    const STABILITY = [
+      "不明",
+      "たぶん安定",
+      "観測不能",
+      "めっちゃ安定",
+      "それはもう安定のほかない",
+      "もうだめだ"
+    ];
+
+    const ENVS = [
+      "気分",
+      "夜",
+      "Wi-Fiが弱い場所",
+      "Wi-Fiがめっちゃ強いとこ",
+      "あなたの心の中"
+    ];
 
     function randInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -104,12 +115,10 @@
       return a;
     }
 
-    // --- 適当メタ情報 ---
     function fakeLastUpdated() {
       const daysAgo = randInt(0, 420);
       const d = new Date();
       d.setDate(d.getDate() - daysAgo);
-
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, "0");
       const day = String(d.getDate()).padStart(2, "0");
@@ -126,8 +135,6 @@
     function renderWorks() {
       const grid = document.getElementById("grid");
       grid.innerHTML = "";
-
-      WORKS.forEach(() => {}); // 意味のない一行
 
       WORKS.forEach(w => {
         const el = document.createElement("article");
@@ -164,7 +171,7 @@
     }
 
     function rerollStats() {
-      document.getElementById("stat1").textContent = `存在濃度: ${randInt(3, 97)}%`;
+      document.getElementById("stat1").textContent = `睡魔: ${randInt(3, 97)}%`;
       document.getElementById("stat2").textContent = "意味: 0%";
       document.getElementById("stat3").textContent =
         `やる気: ${pick(["未検出", "欠損", "推定", "保留", "N/A"])}`;
